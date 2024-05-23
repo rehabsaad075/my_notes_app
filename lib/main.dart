@@ -22,6 +22,11 @@ class MyNotesApp extends StatelessWidget {
             fontSize: 22,
             fontWeight: FontWeight.w600
           ),
+            titleSpacing: 12,
+          iconTheme: IconThemeData(
+            color: AppColors.appColor,
+            size: 27,
+          ),
           actionsIconTheme: IconThemeData(
             color: AppColors.appColor,
             size: 25

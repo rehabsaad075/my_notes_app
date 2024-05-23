@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_notes_app/view/add_notes_screen.dart';
 import 'package:my_notes_app/view_model/app_icons.dart';
+import 'package:my_notes_app/view_model/navigation_functions.dart';
 
 class NotesHomePageScreen extends StatelessWidget {
   const NotesHomePageScreen({super.key});
@@ -30,7 +32,12 @@ class NotesHomePageScreen extends StatelessWidget {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
         floatingActionButton: FloatingActionButton(
-          onPressed: () {  },
+          onPressed: () {
+            navigationPushFunction(
+                context: context,
+                screen: const AddNotesScreen()
+            );
+          },
           child: const Icon(
               AppIcons.addIcon
           ),
