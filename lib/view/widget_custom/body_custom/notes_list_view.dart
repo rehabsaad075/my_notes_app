@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_notes_app/view/screens/edit_notes_screen.dart';
 import 'package:my_notes_app/view/widget_custom/notes_item_custom.dart';
+import 'package:my_notes_app/view_model/navigation_functions.dart';
 
 class NotesListView extends StatelessWidget {
   const NotesListView({super.key});
@@ -10,7 +12,15 @@ class NotesListView extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 8),
         itemBuilder: (context,index){
-          return const NotesItemCustom();
+          return  NotesItemCustom(
+            onTap: (){
+              navigationPushFunction(
+                  context: context,
+                  screen: const EditNotesScreen()
+              );
+
+            },
+          );
         },
         separatorBuilder: (context,index){
           return const SizedBox(height: 10,);

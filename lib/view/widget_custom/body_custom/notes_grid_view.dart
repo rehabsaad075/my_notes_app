@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_notes_app/view/screens/edit_notes_screen.dart';
 import 'package:my_notes_app/view/widget_custom/notes_item_custom.dart';
+import 'package:my_notes_app/view_model/navigation_functions.dart';
 
 class NotesGridView extends StatelessWidget {
   const NotesGridView({super.key});
@@ -16,7 +18,13 @@ class NotesGridView extends StatelessWidget {
         mainAxisSpacing: 15
     ),
         itemBuilder: (context,index){
-      return const NotesItemCustom(
+      return  NotesItemCustom(
+        onTap: (){
+          navigationPushFunction(
+              context: context,
+              screen: const EditNotesScreen()
+          );
+        },
         maxLines: 3,
       );
     },
