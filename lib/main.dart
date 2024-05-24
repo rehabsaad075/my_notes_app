@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_notes_app/view/my_notes_splash_screen.dart';
+import 'package:my_notes_app/view/screens/my_notes_splash_screen.dart';
 import 'package:my_notes_app/view_model/app_colors.dart';
 
 void main() {

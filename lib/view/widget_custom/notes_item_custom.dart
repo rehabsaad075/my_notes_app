@@ -3,7 +3,8 @@ import 'package:my_notes_app/view_model/app_colors.dart';
 import 'package:my_notes_app/view_model/app_icons.dart';
 
 class NotesItemCustom extends StatelessWidget {
-  const NotesItemCustom({super.key});
+  final int? maxLines;
+  const NotesItemCustom({super.key, this.maxLines=1});
 
   @override
   Widget build(BuildContext context) {
@@ -41,24 +42,37 @@ class NotesItemCustom extends StatelessWidget {
               fontWeight: FontWeight.bold
             ),
           ),
-          const Text(
+           Text(
             'تنزيل هذا التطبيق وتجربته لانشاء تطبيقى الخاص بى,الان اقوم بكتابة الكود الخاص بهذا التطبيق',
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
             ),
-            maxLines: 1,
+            maxLines: maxLines,
           overflow: TextOverflow.ellipsis,
           ),
           Row(
             children: [
-               Text(
-                'May 20,2024 2:50 AM',
-                style: TextStyle(
-                    color: AppColors.gray!
-                ),
+               Expanded(
+                 child: Column(
+                   crossAxisAlignment: CrossAxisAlignment.start,
+                   children: [
+                     Text(
+                      'May 20,2024',
+                      style: TextStyle(
+                          color: AppColors.gray!
+                      ),
               ),
-              const Spacer(),
+                     const SizedBox(height: 3,),
+                     Text(
+                       '2:50 AM',
+                       style: TextStyle(
+                           color: AppColors.gray!
+                       ),
+                     ),
+                   ],
+                 ),
+               ),
               IconButton(
                   onPressed: (){},
                   icon: const Icon(
