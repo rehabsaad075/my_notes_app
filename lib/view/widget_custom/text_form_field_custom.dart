@@ -28,7 +28,7 @@ class TextFormFieldCustom extends StatelessWidget {
         ),
         focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
-            color: AppColors.gr
+            color: AppColors.gray
           )
         )
       ),

@@ -8,6 +8,8 @@ abstract class AppIcons{
   static const IconData rectangleIcon=FontAwesomeIcons.list;
   static const IconData arrowIcon=Icons.arrow_forward;
   static const IconData doneIcon=Icons.done;
+  static const IconData deleteIcon=Icons.delete;
+
 
 
 }

@@ -14,23 +14,23 @@ class NotesItemCustom extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: const BoxDecoration(
-            color: AppColors.othersColor,
+            color: AppColors.finalColor,
             borderRadius: BorderRadius.all(Radius.circular(5)),
           border:  Border(
             right: BorderSide(
-              color: AppColors.othersBorderColor,
+              color: AppColors.finalBorderColor,
               width: 7
             ),
             left: BorderSide(
-                color: AppColors.othersBorderColor,
+                color: AppColors.finalBorderColor,
                 width: 0
             ),
             top: BorderSide(
-                color: AppColors.othersBorderColor,
+                color: AppColors.finalBorderColor,
                 width: 0
             ),
             bottom: BorderSide(
-                color: AppColors.othersBorderColor,
+                color: AppColors.finalBorderColor,
                 width: 0
             ),
           )
@@ -63,14 +63,14 @@ class NotesItemCustom extends StatelessWidget {
                        Text(
                         'May 20,2024',
                         style: TextStyle(
-                            color: AppColors.gray!
+                            color: AppColors.gray800!
                         ),
                 ),
                        const SizedBox(height: 3,),
                        Text(
                          '2:50 AM',
                          style: TextStyle(
-                             color: AppColors.gray!
+                             color: AppColors.gray800!
                          ),
                        ),
                      ],
@@ -78,8 +78,9 @@ class NotesItemCustom extends StatelessWidget {
                  ),
                 IconButton(
                     onPressed: (){},
-                    icon: const Icon(
-                        AppIcons.threeDotVertIcon
+                    icon:  Icon(
+                        AppIcons.deleteIcon,
+                      color: AppColors.gray700,
                     )
                 ),
               ],

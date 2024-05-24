@@ -33,7 +33,7 @@ class AddNotesScreen extends StatelessWidget {
             Text(
                 'may 20,2024 2:50 AM',
               style: TextStyle(
-                color: AppColors.gr
+                color: AppColors.gray
               ),
             ),
             TextFormFieldCustom(
