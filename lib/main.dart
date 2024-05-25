@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:my_notes_app/view/screens/my_notes_splash_screen.dart';
 import 'package:my_notes_app/view_model/app_colors.dart';
+import 'package:my_notes_app/view_model/constants.dart';
 
-void main() {
+Future<void> main() async {
+  await Hive.initFlutter();
+  await Hive.openBox(noteBox);
   runApp(const MyNotesApp());
 }
 
