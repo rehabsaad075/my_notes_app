@@ -5,11 +5,13 @@ class TextFormFieldCustom extends StatelessWidget {
   final String hintText;
   final FontWeight? fontWeight;
   final int? maxLines;
+  final TextEditingController? controller;
   const TextFormFieldCustom({
     super.key,
     required this.hintText,
     this.fontWeight,
     this.maxLines=1,
+    this.controller,
   });
 
   @override
@@ -17,6 +19,14 @@ class TextFormFieldCustom extends StatelessWidget {
     return TextFormField(
       cursorColor: AppColors.appColor,
       maxLines:maxLines ,
+      controller:controller ,
+      validator: (value){
+        if(value?.isEmpty ?? true){
+          return 'this value must not empty';
+        }else{
+          return null;
+        }
+      },
       style: const TextStyle(
         fontSize: 18
       ),

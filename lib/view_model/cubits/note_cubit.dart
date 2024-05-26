@@ -1,6 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:my_notes_app/models/note_model.dart';
+import 'package:my_notes_app/view_model/app_colors.dart';
+import 'package:my_notes_app/view_model/constants.dart';
 
 part 'note_state.dart';
 
@@ -10,8 +14,25 @@ class NoteCubit extends Cubit<NoteState> {
 
   var titleController = TextEditingController();
   var contentController = TextEditingController();
-  var dateController = TextEditingController();
-  var timeController = TextEditingController();
 
   var formKey=GlobalKey<FormState>();
+
+  NoteModel ?noteModel;
+  addNote() async {
+    emit(AddNoteLoadingState());
+    var noteBo=Hive.box<NoteModel>(noteBox);
+    noteModel=NoteModel(
+        title: titleController.text,
+        content: contentController.text,
+        date: DateTime.now().toString(),
+        time: DateTime.now().toString(),
+        color: AppColors.finalColor.value
+    );
+    await noteBo.add(noteModel!)
+        .then((value) {
+      emit(AddNoteSuccessState());
+    }).catchError((error){
+      emit(AddNoteErrorState(error.toString()));
+    });
+  }
 }
