@@ -12,3 +12,5 @@ class AddNoteErrorState extends NoteState {
   AddNoteErrorState(this.error);
 }
 
+class GetNotesSuccessState extends NoteState {}
+

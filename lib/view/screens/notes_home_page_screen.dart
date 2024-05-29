@@ -32,7 +32,7 @@ class NotesHomePageScreen extends StatelessWidget {
             ),
           ],
         ),
-        body: const NotesGridView(),
+        body: const NotesListView(),
         floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
         floatingActionButton: FloatingActionButton(
           onPressed: () {

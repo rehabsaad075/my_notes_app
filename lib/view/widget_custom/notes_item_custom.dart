@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:my_notes_app/models/note_model.dart';
 import 'package:my_notes_app/view_model/app_colors.dart';
 import 'package:my_notes_app/view_model/app_icons.dart';
+import 'package:my_notes_app/view_model/cubits/note_cubit.dart';
 
 class NotesItemCustom extends StatelessWidget {
   final int? maxLines;
   final void Function()? onTap;
-  const NotesItemCustom({super.key, this.maxLines=1,required this.onTap});
+  final NoteModel note;
+  const NotesItemCustom({
+    super.key,
+    this.maxLines=1,
+    required this.onTap,
+    required this.note
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,15 +46,15 @@ class NotesItemCustom extends StatelessWidget {
         child:  Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-                'تجربة',
-              style: TextStyle(
+             Text(
+                note.title,
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold
               ),
             ),
              Text(
-              'تنزيل هذا التطبيق وتجربته لانشاء تطبيقى الخاص بى,الان اقوم بكتابة الكود الخاص بهذا التطبيق',
+               note.content,
               style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
@@ -61,14 +69,14 @@ class NotesItemCustom extends StatelessWidget {
                      crossAxisAlignment: CrossAxisAlignment.start,
                      children: [
                        Text(
-                        'May 20,2024',
+                        note.date,
                         style: TextStyle(
                             color: AppColors.gray800!
                         ),
                 ),
                        const SizedBox(height: 3,),
                        Text(
-                         '2:50 AM',
+                        note.time,
                          style: TextStyle(
                              color: AppColors.gray800!
                          ),
@@ -77,7 +85,10 @@ class NotesItemCustom extends StatelessWidget {
                    ),
                  ),
                 IconButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      note.delete();
+                      NoteCubit.get(context).getNotes();
+                    },
                     icon:  Icon(
                         AppIcons.deleteIcon,
                       color: AppColors.gray700,
