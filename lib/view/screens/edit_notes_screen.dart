@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'  hide TextDirection;
 import 'package:my_notes_app/models/note_model.dart';
+import 'package:my_notes_app/view/widget_custom/colors_list_view.dart';
 import 'package:my_notes_app/view/widget_custom/text_form_field_custom.dart';
 import 'package:my_notes_app/view_model/app_colors.dart';
 import 'package:my_notes_app/view_model/app_icons.dart';
@@ -28,8 +29,27 @@ class _EditNotesScreenState extends State<EditNotesScreen> {
       child: Directionality(
           textDirection: TextDirection.rtl,
           child: Scaffold(
+            backgroundColor: AppColors.finalColor,
             appBar: AppBar(
+              backgroundColor: AppColors.finalColor,
               actions: [
+                IconButton(
+                    onPressed: (){
+                      showModalBottomSheet(
+                          shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(16),
+                                  topRight:Radius.circular(16)
+                              )
+                          ),
+                          context: context,
+                          builder: (context)=> const ColorsListView()
+                      );
+                    },
+                    icon: const Icon(
+                        AppIcons.colorIcon
+                    )
+                ),
                 IconButton(
                     onPressed: (){
                       if (NoteCubit.get(context).formEditKey.currentState!.validate()){
@@ -41,12 +61,6 @@ class _EditNotesScreenState extends State<EditNotesScreen> {
                     },
                     icon: const Icon(
                         AppIcons.doneIcon
-                    )
-                ),
-                IconButton(
-                    onPressed: (){},
-                    icon: const Icon(
-                        AppIcons.threeDotVertIcon
                     )
                 ),
               ],
