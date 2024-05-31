@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart' hide TextDirection;
 import 'package:my_notes_app/view/widget_custom/text_form_field_custom.dart';
 import 'package:my_notes_app/view_model/app_colors.dart';
 import 'package:my_notes_app/view_model/app_icons.dart';
@@ -10,10 +10,10 @@ class AddNotesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Form(
-        key: NoteCubit.get(context).formKey,
+    return Form(
+      key: NoteCubit.get(context).formKey,
+      child: Directionality(
+        textDirection: TextDirection.rtl,
         child: Scaffold(
           appBar: AppBar(
             actions: [
@@ -41,9 +41,9 @@ class AddNotesScreen extends StatelessWidget {
           body: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 16,),
             children: [
-              const Text(
-                  'may 20,2024 2:50 AM',
-                style: TextStyle(
+               Text(
+                 DateFormat('MMM dd, yyyy hh:mm a').format(DateTime.now()),
+                style: const TextStyle(
                   color: AppColors.gray
                 ),
               ),
@@ -56,6 +56,13 @@ class AddNotesScreen extends StatelessWidget {
               TextFormFieldCustom(
                 hintText: 'اكتب ملاحظاتك',
                 maxLines: 35,
+                validator: (value){
+                  if(value?.isEmpty ?? true){
+                    return 'this value must not empty';
+                  }else{
+                    return null;
+                  }
+                },
                 controller: NoteCubit.get(context).contentController,
               ),
             ],

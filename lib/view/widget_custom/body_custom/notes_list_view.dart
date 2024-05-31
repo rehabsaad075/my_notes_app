@@ -6,7 +6,8 @@ import 'package:my_notes_app/view_model/cubits/note_cubit.dart';
 import 'package:my_notes_app/view_model/navigation_functions.dart';
 
 class NotesListView extends StatelessWidget {
-  const NotesListView({super.key});
+
+  const NotesListView({super.key, });
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +20,12 @@ class NotesListView extends StatelessWidget {
             itemBuilder: (context, index) {
               return NotesItemCustom(
                 onTap: () {
+                  noteCubit.changeNoteIndex(index);
                   navigationPushFunction(
                       context: context,
-                      screen: const EditNotesScreen()
+                      screen:  EditNotesScreen(
+                        note: noteCubit.noteEdit,
+                      )
                   );
                 }, note: noteCubit.notesList[index],
               );

@@ -16,7 +16,15 @@ class NoteCubit extends Cubit<NoteState> {
   var titleController = TextEditingController();
   var contentController = TextEditingController();
 
+  var titleEditController = TextEditingController();
+  var contentEditController = TextEditingController();
+
   var formKey=GlobalKey<FormState>();
+  var formEditKey=GlobalKey<FormState>();
+
+
+  var formatterDate=DateFormat.yMMMd().format(DateTime.now());
+  var formatterTime=DateFormat('kk:mm a').format(DateTime.now());
 
   NoteModel ?noteModel;
   addNote() async {
@@ -25,8 +33,8 @@ class NoteCubit extends Cubit<NoteState> {
     noteModel=NoteModel(
         title: titleController.text,
         content: contentController.text,
-        date: DateFormat.yMMMd().format(DateTime.now()),
-        time: DateFormat('kk:mm').format(DateTime.now()),
+        date: formatterDate,
+        time: formatterTime,
         color: AppColors.finalColor.value
     );
     await noteBo.add(noteModel!)
@@ -45,6 +53,35 @@ class NoteCubit extends Cubit<NoteState> {
     var noteBo=Hive.box<NoteModel>(noteBox);
     notesList= noteBo.values.toList();
     emit(GetNotesSuccessState());
+  }
+
+  int currentNoteIndex=0;
+  void changeNoteIndex(int index){
+    currentNoteIndex=index;
+    emit(ChangeNoteIndexState());
+  }
+  setDataFromNoteModelToControllers(){
+    titleEditController.text=notesList[currentNoteIndex].title??'';
+    contentEditController.text=notesList[currentNoteIndex].content;
+  }
+  NoteModel ?noteEdit;
+  editNote() async {
+    notesList[currentNoteIndex].title=titleEditController.text;
+    notesList[currentNoteIndex].content=contentEditController.text;
+    notesList[currentNoteIndex].date=formatterDate;
+    notesList[currentNoteIndex].time=formatterTime;
+    noteEdit=NoteModel(
+        title: titleEditController.text,
+        content: contentEditController.text,
+        date: formatterDate,
+        time: formatterTime,
+        color: AppColors.finalColor.value
+    );
+    var noteBo=Hive.box<NoteModel>(noteBox);
+    await noteBo.putAt(currentNoteIndex, noteEdit!).then((value) {
+      emit(EditNoteSuccessState());
+    });
+
   }
 }
 

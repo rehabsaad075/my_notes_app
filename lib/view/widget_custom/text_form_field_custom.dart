@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:my_notes_app/view_model/app_colors.dart';
 
 class TextFormFieldCustom extends StatelessWidget {
-  final String hintText;
+  final String ?hintText;
   final FontWeight? fontWeight;
   final int? maxLines;
+  final String? Function(String?)? validator;
   final TextEditingController? controller;
   const TextFormFieldCustom({
     super.key,
-    required this.hintText,
+     this.hintText,
     this.fontWeight,
     this.maxLines=1,
     this.controller,
+    this.validator,
   });
 
   @override
@@ -20,13 +22,7 @@ class TextFormFieldCustom extends StatelessWidget {
       cursorColor: AppColors.appColor,
       maxLines:maxLines ,
       controller:controller ,
-      validator: (value){
-        if(value?.isEmpty ?? true){
-          return 'this value must not empty';
-        }else{
-          return null;
-        }
-      },
+      validator: validator,
       style: const TextStyle(
         fontSize: 18
       ),

@@ -6,7 +6,7 @@ import 'package:my_notes_app/view_model/cubits/note_cubit.dart';
 import 'package:my_notes_app/view_model/navigation_functions.dart';
 
 class NotesGridView extends StatelessWidget {
-  const NotesGridView({super.key});
+  const NotesGridView({super.key,});
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +25,15 @@ class NotesGridView extends StatelessWidget {
           itemBuilder: (context, index) {
             return NotesItemCustom(
               onTap: () {
+                noteCubit.changeNoteIndex(index);
                 navigationPushFunction(
                     context: context,
-                    screen: const EditNotesScreen()
+                    screen:  EditNotesScreen(
+                      note:noteCubit.noteEdit,
+                    )
                 );
               },
-              maxLines: 3,
+              maxLines: 2,
               note: noteCubit.notesList[index],
             );
           },

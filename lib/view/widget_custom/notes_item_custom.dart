@@ -47,12 +47,13 @@ class NotesItemCustom extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
              Text(
-                note.title,
+                note.title??note.content,
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold
               ),
             ),
+             const SizedBox(height: 5,),
              Text(
                note.content,
               style: const TextStyle(
@@ -62,6 +63,7 @@ class NotesItemCustom extends StatelessWidget {
               maxLines: maxLines,
             overflow: TextOverflow.ellipsis,
             ),
+            const SizedBox(height: 10,),
             Row(
               children: [
                  Expanded(
