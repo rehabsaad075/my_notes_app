@@ -12,7 +12,7 @@ class NotesItemCustom extends StatelessWidget {
     super.key,
     this.maxLines=1,
     required this.onTap,
-    required this.note
+    required this.note,
   });
 
   @override
@@ -21,24 +21,24 @@ class NotesItemCustom extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.all(10),
-        decoration: const BoxDecoration(
-            color: AppColors.finalColor,
-            borderRadius: BorderRadius.all(Radius.circular(5)),
+        decoration: BoxDecoration(
+            color: Color(note.color),
+            borderRadius: const BorderRadius.all(Radius.circular(5)),
           border:  Border(
             right: BorderSide(
-              color: AppColors.finalBorderColor,
+              color: Color(note.borderColor),
               width: 7
             ),
             left: BorderSide(
-                color: AppColors.finalBorderColor,
+                color: Color(note.borderColor),
                 width: 0
             ),
             top: BorderSide(
-                color: AppColors.finalBorderColor,
+                color: Color(note.borderColor),
                 width: 0
             ),
             bottom: BorderSide(
-                color: AppColors.finalBorderColor,
+                color: Color(note.borderColor),
                 width: 0
             ),
           )

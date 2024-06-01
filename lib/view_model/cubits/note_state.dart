@@ -17,3 +17,7 @@ class GetNotesSuccessState extends NoteState {}
 class ChangeNoteIndexState extends NoteState {}
 
 class EditNoteSuccessState extends NoteState {}
+
+class ChangeIndexOfColorsState extends NoteState {}
+
+class AddColorToNoteState extends NoteState {}

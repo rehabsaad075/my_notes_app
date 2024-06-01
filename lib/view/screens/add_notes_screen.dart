@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:my_notes_app/view/widget_custom/colors_list_view.dart';
 import 'package:my_notes_app/view/widget_custom/text_form_field_custom.dart';
@@ -7,18 +8,21 @@ import 'package:my_notes_app/view_model/app_icons.dart';
 import 'package:my_notes_app/view_model/cubits/note_cubit.dart';
 
 class AddNotesScreen extends StatelessWidget {
-  const AddNotesScreen({super.key});
+  const AddNotesScreen({super.key,});
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<NoteCubit, NoteState>(
+  builder: (context, state) {
+    NoteCubit  note=NoteCubit.get(context);
     return Form(
       key: NoteCubit.get(context).formKey,
       child: Directionality(
         textDirection: TextDirection.rtl,
         child: Scaffold(
-          backgroundColor: AppColors.allColor,
+          backgroundColor: note.scaffoldColor,
           appBar: AppBar(
-            backgroundColor: AppColors.allColor,
+            backgroundColor: note.scaffoldColor,
             actions: [
               IconButton(
                   onPressed: (){
@@ -84,5 +88,7 @@ class AddNotesScreen extends StatelessWidget {
         ),
       ),
     );
+  },
+);
   }
 }

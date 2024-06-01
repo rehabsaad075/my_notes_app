@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:intl/intl.dart';
+import 'package:my_notes_app/models/colors_model.dart';
 import 'package:my_notes_app/models/note_model.dart';
 import 'package:my_notes_app/view_model/app_colors.dart';
 import 'package:my_notes_app/view_model/constants.dart';
@@ -27,6 +28,7 @@ class NoteCubit extends Cubit<NoteState> {
   var formatterTime=DateFormat('kk:mm a').format(DateTime.now());
 
   NoteModel ?noteModel;
+  ColorsModel ?colorsModel;
   addNote() async {
     emit(AddNoteLoadingState());
     var noteBo=Hive.box<NoteModel>(noteBox);
@@ -35,7 +37,9 @@ class NoteCubit extends Cubit<NoteState> {
         content: contentController.text,
         date: formatterDate,
         time: formatterTime,
-        color: AppColors.finalColor.value
+        color: colorsModel?.backColor.value??AppColors.allColor.value,
+        borderColor: colorsModel?.circleColor.value??AppColors.allBorderColor.value ,
+        colorName: colorsModel?.colorName??'all'
     );
     await noteBo.add(noteModel!)
         .then((value) {
@@ -75,13 +79,60 @@ class NoteCubit extends Cubit<NoteState> {
         content: contentEditController.text,
         date: formatterDate,
         time: formatterTime,
-        color: AppColors.finalColor.value
+        color: AppColors.finalColor.value,
+        borderColor: colorsModel?.circleColor.value??AppColors.allBorderColor.value ,
+        colorName: colorsModel?.colorName??'all'
     );
     var noteBo=Hive.box<NoteModel>(noteBox);
     await noteBo.putAt(currentNoteIndex, noteEdit!).then((value) {
       emit(EditNoteSuccessState());
     });
 
+  }
+
+
+  List<ColorsModel>colorsList=[
+    ColorsModel(
+      backColor: AppColors.allColor,
+      circleColor: AppColors.allBorderColor,
+      colorName:'all',
+    ),
+    ColorsModel(
+      backColor: AppColors.personalColor,
+      circleColor: AppColors.personalBorderColor,
+      colorName:'personal',
+    ),
+    ColorsModel(
+      backColor: AppColors.workColor,
+      circleColor: AppColors.workBorderColor,
+      colorName:'work',
+    ),
+    ColorsModel(
+      backColor: AppColors.finalColor,
+      circleColor: AppColors.finalBorderColor,
+      colorName:'final',
+    ),
+    ColorsModel(
+        backColor: AppColors.othersColor,
+        circleColor: AppColors.othersBorderColor,
+        colorName:'other'
+    ),
+  ];
+
+
+
+  int currentIndex=0;
+  void changeIndexOfColors(int index){
+    currentIndex=index;
+    emit(ChangeIndexOfColorsState());
+  }
+
+
+  Color scaffoldColor=AppColors.allColor;
+  void addColorToNote(int index){
+    colorsModel=colorsList[index];
+    scaffoldColor=colorsModel?.backColor??AppColors.allColor;
+    emit(AddColorToNoteState());
   }
 }
 

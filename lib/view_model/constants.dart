@@ -1,1 +1,1 @@
-const String noteBox='notes_box';
+const String noteBox='note_box';
