@@ -1,16 +1,34 @@
-# my_notes_app
 
-A new Flutter project.
+---
 
-## Getting Started
+### 2. `README.md` — Notes App
 
-This project is a starting point for a Flutter application.
+```markdown
+# Notes App
 
-A few resources to get you started if this is your first Flutter project:
+## 📝 Overview
+A simple, offline-capable note-taking application where users can add, edit, and delete personal notes.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 🚀 Features
+- Add, edit, delete notes
+- Offline access using Hive
+- Clean and responsive UI
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🛠️ Technologies Used
+- Flutter
+- Dart
+- Hive (Local Database)
+- cubit
+
+## 🧠 My Role
+- Developed CRUD functionality
+- Implemented local storage
+- Built the UI and handled state management
+
+## 📦 Installation
+```bash
+git clone https://github.com/your-username/notes_app.git
+cd notes_app
+flutter pub get
+flutter run
+
